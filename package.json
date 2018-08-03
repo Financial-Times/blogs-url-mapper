@@ -1,0 +1,43 @@
+{
+  "name": "blogs-mapper",
+  "version": "1.0.0",
+  "description": "Serverless API app that maps legacy-style Blogs URLS to UUID-based URLs",
+  "main": "handler.js",
+  "scripts": {
+    "logs": "export $(grep -v '^#' .env | xargs) && serverless logs -f map",
+    "deploy": "export $(grep -v '^#' .env | xargs) && serverless deploy --verbose --conceal",
+    "remove": "export $(grep -v '^#' .env | xargs) && serverless remove --verbose --conceal",
+    "package": "export $(grep -v '^#' .env | xargs) && serverless package",
+    "test": "export $(grep -v '^#' .env | xargs) && serverless invoke local -f redirect -p test-event.json",
+		"precommit": "secret-squirrel",
+		"commitmsg": "secret-squirrel-commitmsg"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Financial-Times/blogs-mapper.git"
+  },
+  "keywords": [
+    "FT",
+    "Blogs",
+    "URL",
+    "UUID",
+    "mapper",
+    "legacy"
+  ],
+  "author": "Jan Majek",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Financial-Times/blogs-mapper/issues"
+  },
+  "homepage": "https://github.com/Financial-Times/blogs-mapper#readme",
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "mysql": "^2.16.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@financial-times/secret-squirrel": "^2.10.2",
+    "husky": "^0.14.3",
+    "serverless": "^1.28.0"
+  }
+}

@@ -1,0 +1,39 @@
+service: todelete-blogs-mapper
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  deploymentBucket: ${env:AWS_DEPLOYMENT_BUCKET}
+  region: ${env:AWS_REGION}
+  role: ${env:AWS_ROLE}
+  # timeout: 30
+  # vpc:
+  #   securityGroupIds:
+  #     - sg-54c0a631
+  #     - sg-a5fd99c0
+  #   subnetIds:
+  #     - subnet-73ecbc35
+  #     - subnet-33102047
+  #     - subnet-63690406
+
+functions:
+  # map:
+  #   handler: handler.map
+  #   events:
+  #     - http:
+  #         path: /
+  #         method: get
+  redirect:
+    handler: handler.redirect
+    events:
+      - http:
+          path: /
+          method: get
+      - http:
+          path: /{proxy+}
+          method: get
+
+package:
+  exclude:
+    - konstructor.txt
+    - test.js
